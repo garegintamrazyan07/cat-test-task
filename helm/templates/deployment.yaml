@@ -1,0 +1,35 @@
+
+---
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: "{{ .Values.namespace }}"
+  labels:
+    app : myapp
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: myapp
+  template:
+    metadata:
+      labels:
+        project: myapp
+    spec:
+      serviceAccountName: my-service-account   
+      containers:
+        - name: myapp
+          image: "{{ .Values.ContainerImageBase }}/{{ .Values.RepositoryName }}:{{ .Values.ContainerTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }} 
+          ports:
+            - containerPort: {{ .Values.Port }} 
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 600m
+            limits:
+              memory: 2000Mi
+              cpu: 2000m
