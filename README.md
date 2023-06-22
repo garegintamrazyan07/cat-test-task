@@ -96,6 +96,10 @@ Each line represents a separate test from the structure-test.yaml file, and "PAS
 
 * A running Kubernetes cluster
 * kubectl and helm installed and configured to interact with your cluster
+* Ingress Controller installed in your cluster to manage access to services
+* Cert Manager installed in your cluster for managing certificates
+
+Before deploying the application to a Kubernetes cluster, you need to ensure that you have an Ingress Controller and Cert Manager installed in your Kubernetes cluster. The Ingress Controller is needed to manage external access to the services in your cluster, while the Cert Manager is required to handle certificate management tasks such as issuing certificates from Let's Encrypt.
 
 ### Enforce Security Policies with Gatekeeper
 
